@@ -6,7 +6,7 @@ import { useTemplateStore } from '../../store/templateStore'
 import FormField from './FormField'
 
 const DynamicForm = () => {
-  const { selectedTemplate, formData, updateFormData } = useTemplateStore()
+  const { selectedTemplate, formData, updateFormData, resetFormData } = useTemplateStore()
 
   // Create dynamic Zod schema based on template fields
   const createSchema = (fields) => {
@@ -104,8 +104,8 @@ const DynamicForm = () => {
         ))}
       </form>
 
-      {/* Load Example Button */}
-      <div className="pt-4 border-t border-gray-200 dark:border-gray-600">
+      {/* Actions: Load Example / Clear */}
+      <div className="pt-4 border-t border-gray-200 dark:border-gray-600 flex items-center gap-3">
         <button
           type="button"
           onClick={() => {
@@ -118,6 +118,38 @@ const DynamicForm = () => {
           className="px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
         >
           Load Example
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            if (!selectedTemplate) return
+            // Clear all fields in the form UI according to type
+            selectedTemplate.fields.forEach(field => {
+              let cleared
+              switch (field.type) {
+                case 'array':
+                  cleared = []
+                  break
+                case 'boolean':
+                  cleared = false
+                  break
+                case 'number':
+                  // set empty to clear input; validation will prompt user to enter number
+                  cleared = ''
+                  break
+                default:
+                  cleared = ''
+              }
+              setValue(field.key, cleared)
+              updateFormData(field.key, cleared)
+            })
+            // Also clear any extra keys and reset store
+            resetFormData()
+          }}
+          className="px-4 py-2 text-sm bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 rounded-lg transition-colors"
+        >
+          Clear
         </button>
       </div>
     </div>
