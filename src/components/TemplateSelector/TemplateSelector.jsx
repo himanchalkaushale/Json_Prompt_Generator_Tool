@@ -32,7 +32,7 @@ const TemplateSelector = () => {
   const categories = ['All', ...Object.values(TEMPLATE_CATEGORIES)]
 
   return (
-    <div className="space-y-4">
+    <div className="h-full flex flex-col gap-4">
       {/* Search and Filter */}
       <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
         <div className="relative flex-1">
@@ -62,7 +62,7 @@ const TemplateSelector = () => {
       </div>
 
       {/* Template Grid */}
-      <div className="grid grid-cols-1 gap-2 sm:gap-3 max-h-[40vh] sm:max-h-[50vh] lg:max-h-[calc(100vh-280px)] overflow-y-auto">
+      <div className="flex-1 min-h-0 grid grid-cols-1 gap-2 sm:gap-3 overflow-y-auto">
         {filteredTemplates.map(template => (
           <TemplateCard
             key={template.id}

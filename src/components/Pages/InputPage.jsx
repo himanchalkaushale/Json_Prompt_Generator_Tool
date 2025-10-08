@@ -187,7 +187,7 @@ const InputPage = () => {
                 Select a template to get started
               </p>
             </div>
-            <div className="flex-1 p-4 overflow-auto">
+            <div className="flex-1 min-h-0 p-4 overflow-hidden">
               <TemplateSelector />
             </div>
             <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
@@ -218,7 +218,7 @@ const InputPage = () => {
                 {selectedTemplate.name}
               </p>
             </div>
-            <div className="flex-1 p-4 overflow-auto">
+            <div className="flex-1 min-h-0 p-4 overflow-hidden">
               <DynamicForm />
             </div>
             <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-2">
@@ -263,7 +263,7 @@ const InputPage = () => {
                 Check your configuration before generating
               </p>
             </div>
-            <div className="flex-1 p-4 overflow-auto">
+            <div className="flex-1 min-h-0 p-4 overflow-hidden">
               <div className="space-y-4">
                 <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
                   <h3 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
@@ -374,8 +374,19 @@ const InputPage = () => {
                   <div className="w-56 h-56 bg-gradient-to-tr from-violet-400/20 to-fuchsia-400/20 rounded-full blur-3xl absolute -bottom-10 -right-10 animate-pulse" />
                 </div>
 
+                {/* Mobile message */}
+                <div className="lg:hidden text-center px-4">
+                  <div className="text-4xl mb-4">👈</div>
+                  <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
+                    Select a Template
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    Choose a template from the list above to get started
+                  </p>
+                </div>
+
                 {/* Desktop Quick Start */}
-                <div>
+                <div className="hidden lg:block">
                   <div className="text-center mb-6">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-200 text-sm font-medium">
                       <Rocket className="w-4 h-4" />
