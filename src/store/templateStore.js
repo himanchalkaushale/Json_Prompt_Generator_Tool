@@ -5,10 +5,27 @@ export const useTemplateStore = create((set, get) => ({
   formData: {},
   templates: [],
   currentPage: 'input', // 'input' or 'output'
+  mobileStep: 1, // 1: template selection, 2: form filling, 3: review, 4: output
   
   setSelectedTemplate: (template) => set({ 
     selectedTemplate: template,
     formData: {} // Reset form data when template changes
+  }),
+  
+  setMobileStep: (step) => set({ mobileStep: step }),
+  
+  nextMobileStep: () => set((state) => ({ 
+    mobileStep: Math.min(state.mobileStep + 1, 4) 
+  })),
+  
+  prevMobileStep: () => set((state) => ({ 
+    mobileStep: Math.max(state.mobileStep - 1, 1) 
+  })),
+  
+  resetMobileFlow: () => set({ 
+    mobileStep: 1,
+    selectedTemplate: null,
+    formData: {}
   }),
   
   updateFormData: (fieldKey, value) => set((state) => ({

@@ -56,39 +56,40 @@ const JSONPreview = ({ data }) => {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 sm:space-y-4">
       {/* Controls */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <button
             onClick={() => setIsMinified(!isMinified)}
-            className="flex items-center gap-2 px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
+            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 text-xs sm:text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
           >
-            {isMinified ? <Maximize2 className="w-4 h-4" /> : <Minimize2 className="w-4 h-4" />}
-            {isMinified ? 'Format' : 'Minify'}
+            {isMinified ? <Maximize2 className="w-3 h-3 sm:w-4 sm:h-4" /> : <Minimize2 className="w-3 h-3 sm:w-4 sm:h-4" />}
+            <span className="hidden sm:inline">{isMinified ? 'Format' : 'Minify'}</span>
           </button>
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
-            className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
+            className="px-2 sm:px-3 py-1 text-xs sm:text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
           >
-            {isDarkMode ? 'Light' : 'Dark'} Theme
+            <span className="hidden sm:inline">{isDarkMode ? 'Light' : 'Dark'} Theme</span>
+            <span className="sm:hidden">{isDarkMode ? 'Light' : 'Dark'}</span>
           </button>
         </div>
         
         <div className="flex items-center gap-2">
           <button
             onClick={handleCopy}
-            className="flex items-center gap-2 px-3 py-1 text-sm bg-blue-100 hover:bg-blue-200 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg transition-colors"
+            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 text-xs sm:text-sm bg-blue-100 hover:bg-blue-200 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg transition-colors flex-1 sm:flex-initial justify-center"
           >
-            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+            {copied ? <Check className="w-3 h-3 sm:w-4 sm:h-4" /> : <Copy className="w-3 h-3 sm:w-4 sm:h-4" />}
             {copied ? 'Copied!' : 'Copy'}
           </button>
           <button
             onClick={handleDownload}
-            className="flex items-center gap-2 px-3 py-1 text-sm bg-green-100 hover:bg-green-200 dark:bg-green-900/20 dark:hover:bg-green-900/30 text-green-700 dark:text-green-300 rounded-lg transition-colors"
+            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 text-xs sm:text-sm bg-green-100 hover:bg-green-200 dark:bg-green-900/20 dark:hover:bg-green-900/30 text-green-700 dark:text-green-300 rounded-lg transition-colors flex-1 sm:flex-initial justify-center"
           >
-            <Download className="w-4 h-4" />
-            Download
+            <Download className="w-3 h-3 sm:w-4 sm:h-4" />
+            <span className="hidden sm:inline">Download</span>
           </button>
         </div>
       </div>
@@ -96,10 +97,10 @@ const JSONPreview = ({ data }) => {
       {/* JSON Display */}
       <div className="border border-gray-200 dark:border-gray-600 rounded-lg overflow-hidden">
         {Object.keys(cleanedData).length === 0 ? (
-          <div className="p-8 text-center text-gray-500 dark:text-gray-400">
-            <div className="text-4xl mb-4">📝</div>
-            <p className="text-lg font-medium mb-2">No data to preview</p>
-            <p className="text-sm">Fill out the form fields to see the JSON output here.</p>
+          <div className="p-4 sm:p-8 text-center text-gray-500 dark:text-gray-400">
+            <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">📝</div>
+            <p className="text-base sm:text-lg font-medium mb-1 sm:mb-2">No data to preview</p>
+            <p className="text-xs sm:text-sm">Fill out the form fields to see the JSON output here.</p>
           </div>
         ) : (
           <div className="relative">
@@ -109,7 +110,7 @@ const JSONPreview = ({ data }) => {
               customStyle={{
                 margin: 0,
                 borderRadius: 0,
-                fontSize: '14px',
+                fontSize: '12px',
                 lineHeight: '1.5'
               }}
               showLineNumbers={!isMinified}
@@ -124,7 +125,7 @@ const JSONPreview = ({ data }) => {
 
       {/* Stats */}
       {Object.keys(cleanedData).length > 0 && (
-        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+        <div className="flex items-center justify-between text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">
           <span>
             {Object.keys(cleanedData).length} field{Object.keys(cleanedData).length !== 1 ? 's' : ''}
           </span>
