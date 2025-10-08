@@ -175,10 +175,10 @@ const InputPage = () => {
       </header>
 
       {/* Mobile Content - Wizard Steps */}
-      <div className="lg:hidden flex-1 flex flex-col overflow-hidden">
+      <div className="lg:hidden flex-1 min-h-0 flex flex-col overflow-hidden">
         {/* Step 1: Template Selection */}
         {mobileStep === 1 && (
-          <div className="flex-1 flex flex-col bg-white dark:bg-gray-800 overflow-hidden">
+          <div className="flex-1 min-h-0 flex flex-col bg-white dark:bg-gray-800 overflow-hidden">
             <div className="p-4 border-b border-gray-200 dark:border-gray-700">
               <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
                 Choose a Template
@@ -188,9 +188,11 @@ const InputPage = () => {
               </p>
             </div>
             <div className="flex-1 min-h-0 p-4 overflow-hidden">
-              <TemplateSelector />
+              <div className="h-full min-h-0 overflow-y-auto">
+                <TemplateSelector />
+              </div>
             </div>
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shrink-0">
               <button
                 onClick={handleMobileNext}
                 disabled={!selectedTemplate}
@@ -335,8 +337,10 @@ const InputPage = () => {
             </div>
           </div>
           
-          <div className="flex-1 p-3 sm:p-6 overflow-hidden">
-            <TemplateSelector />
+          <div className="flex-1 min-h-0 p-3 sm:p-6 overflow-hidden">
+            <div className="h-full min-h-0 overflow-y-auto">
+              <TemplateSelector />
+            </div>
           </div>
         </div>
 
