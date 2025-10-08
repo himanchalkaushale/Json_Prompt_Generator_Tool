@@ -44,7 +44,7 @@ const OutputPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-green-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 overflow-hidden flex flex-col">
+    <div className="min-h-screen bg-gradient-to-r from-green-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 flex flex-col">
       {/* Header */}
       <header className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-3 sm:px-6 py-3 sm:py-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
@@ -94,7 +94,7 @@ const OutputPage = () => {
       </header>
 
       {/* Main Content - Responsive Layout */}
-      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+      <div className="flex-1 min-h-0 flex flex-col lg:flex-row overflow-hidden">
         {/* Left Panel - JSON Output */}
         <div className="w-full lg:w-2/3 bg-white dark:bg-gray-800 flex flex-col max-h-[60vh] lg:max-h-none">
           <div className="p-3 sm:p-6 border-b border-gray-200 dark:border-gray-700">
@@ -116,7 +116,7 @@ const OutputPage = () => {
             </div>
           </div>
           
-          <div className="flex-1 p-3 sm:p-6 overflow-hidden">
+          <div className="flex-1 min-h-0 p-3 sm:p-6 overflow-auto">
             <JSONPreview data={jsonData} />
           </div>
         </div>
