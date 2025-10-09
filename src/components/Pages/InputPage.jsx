@@ -1,5 +1,5 @@
 import React from 'react'
-import { FileText, ArrowRight, ArrowLeft, CheckCircle, Sparkles, Rocket, Wand2, Image as ImageIcon, Code2, BarChart3 } from 'lucide-react'
+import { FileText, ArrowRight, ArrowLeft, CheckCircle, Sparkles, Rocket, Wand2, Image as ImageIcon, Code2, BarChart3, Github, Linkedin } from 'lucide-react'
 import TemplateSelector from '../TemplateSelector/TemplateSelector'
 import DynamicForm from '../DynamicForm/DynamicForm'
 import { useTemplateStore } from '../../store/templateStore'
@@ -78,7 +78,18 @@ const InputPage = () => {
               </h1>
             </div>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-3">
+            <div className="hidden xs:flex items-center gap-2 text-[11px] text-gray-600 dark:text-gray-300">
+              <span className="whitespace-nowrap">Developed by Himanchal Kaushale</span>
+              <a href="https://www.linkedin.com/in/himanchal-kaushale/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-gray-500 hover:text-blue-600">
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a href="https://github.com/himanchalkaushale" target="_blank" rel="noreferrer" aria-label="GitHub" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                <Github className="w-4 h-4" />
+              </a>
+            </div>
+            <ThemeToggle />
+          </div>
         </div>
         
         {/* Step Indicator */}
@@ -128,8 +139,17 @@ const InputPage = () => {
             </div>
           </div>
           
-          {/* Progress Bar */}
-          <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+          {/* Right cluster: Developer info + actions */}
+          <div className="flex items-center gap-4 w-full sm:w-auto">
+            <div className="hidden md:flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+              <span>Developed by Himanchal Kaushale</span>
+              <a href="https://www.linkedin.com/in/himanchal-kaushale/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-gray-500 hover:text-blue-600">
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a href="https://github.com/himanchalkaushale" target="_blank" rel="noreferrer" aria-label="GitHub" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                <Github className="w-4 h-4" />
+              </a>
+            </div>
             <ThemeToggle />
             {selectedTemplate && (
             <div className="flex items-center gap-2 sm:gap-4 flex-1 sm:flex-initial">

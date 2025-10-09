@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowLeft, Code, RefreshCw, Sparkles, CheckCircle } from 'lucide-react'
+import { ArrowLeft, Code, RefreshCw, Sparkles, CheckCircle, Github, Linkedin } from 'lucide-react'
 import JSONPreview from '../JSONPreview/JSONPreview'
 import { useTemplateStore } from '../../store/templateStore'
 import ThemeToggle from '../Layout/ThemeToggle'
@@ -61,6 +61,15 @@ const OutputPage = () => {
           </div>
           
           <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto flex-wrap">
+            <div className="hidden xs:flex items-center gap-2 text-[11px] sm:text-sm text-gray-600 dark:text-gray-300">
+              <span className="whitespace-nowrap">Developed by Himanchal Kaushale</span>
+              <a href="https://www.linkedin.com/in/himanchal-kaushale/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-gray-500 hover:text-blue-600">
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a href="https://github.com/himanchalkaushale" target="_blank" rel="noreferrer" aria-label="GitHub" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                <Github className="w-4 h-4" />
+              </a>
+            </div>
             <ThemeToggle />
             {/* Template Info */}
             <div className="text-left sm:text-right flex-1 sm:flex-initial">
