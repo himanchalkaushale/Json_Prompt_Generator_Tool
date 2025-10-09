@@ -325,7 +325,7 @@ const InputPage = () => {
       </div>
 
       {/* Desktop Content - Side by Side Layout */}
-      <div className="hidden lg:flex flex-1 flex-col lg:flex-row overflow-hidden">
+      <div className="hidden lg:flex h-[calc(100vh-80px)] flex-col lg:flex-row overflow-hidden">
         {/* Left Panel - Template Selection */}
         <div className="w-full lg:w-1/2 border-b lg:border-b-0 lg:border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex flex-col max-h-[50vh] lg:max-h-none">
           <div className="p-3 sm:p-6 border-b border-gray-200 dark:border-gray-700">
