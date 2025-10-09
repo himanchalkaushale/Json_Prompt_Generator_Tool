@@ -28,12 +28,25 @@ export const useTemplateStore = create((set, get) => ({
     formData: {}
   }),
   
-  updateFormData: (fieldKey, value) => set((state) => ({
-    formData: {
-      ...state.formData,
-      [fieldKey]: value
+  updateFormData: (fieldKey, value) => set((state) => {
+    const prev = state.formData[fieldKey]
+    // Primitive equality fast path
+    if (prev === value) return state
+    // Simple structural equality for arrays/objects
+    if (
+      (typeof value === 'object' && value !== null) &&
+      (typeof prev === 'object' && prev !== null) &&
+      JSON.stringify(prev) === JSON.stringify(value)
+    ) {
+      return state
     }
-  })),
+    return {
+      formData: {
+        ...state.formData,
+        [fieldKey]: value
+      }
+    }
+  }),
   
   resetFormData: () => set({ formData: {} }),
   

@@ -64,13 +64,14 @@ const DynamicForm = () => {
 
   // Watch all form values and update store
   const watchedValues = watch()
+  // Sync form values to the store when RHF values change.
+  // Avoid including formData in deps to prevent feedback loops.
   React.useEffect(() => {
-    Object.keys(watchedValues).forEach(key => {
-      if (watchedValues[key] !== formData[key]) {
-        updateFormData(key, watchedValues[key])
-      }
+    // Single batched update (zustand set merges per key anyway)
+    Object.entries(watchedValues).forEach(([key, value]) => {
+      updateFormData(key, value)
     })
-  }, [watchedValues, formData, updateFormData])
+  }, [JSON.stringify(watchedValues), updateFormData])
 
   if (!selectedTemplate) {
     return (
@@ -109,10 +110,9 @@ const DynamicForm = () => {
         <button
           type="button"
           onClick={() => {
-            // Load example data
+            // Load example data (let watch effect sync to store)
             Object.keys(selectedTemplate.example).forEach(key => {
               setValue(key, selectedTemplate.example[key])
-              updateFormData(key, selectedTemplate.example[key])
             })
           }}
           className="px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"

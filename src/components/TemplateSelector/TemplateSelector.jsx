@@ -9,6 +9,9 @@ const TemplateSelector = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [filteredTemplates, setFilteredTemplates] = useState(templates)
+  const [isMobile, setIsMobile] = useState(false)
+  const [page, setPage] = useState(1)
+  const itemsPerPage = 4
 
   useEffect(() => {
     let filtered = templates
@@ -27,9 +30,27 @@ const TemplateSelector = () => {
     }
 
     setFilteredTemplates(filtered)
+    // Reset to first page when filters change
+    setPage(1)
   }, [searchTerm, selectedCategory])
 
+  // Detect mobile (Tailwind lg breakpoint: 1024px)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 1023.98px)')
+    const handler = (e) => setIsMobile(e.matches)
+    handler(mq)
+    mq.addEventListener?.('change', handler)
+    return () => mq.removeEventListener?.('change', handler)
+  }, [])
+
   const categories = ['All', ...Object.values(TEMPLATE_CATEGORIES)]
+
+  // Compute visible templates (mobile paginated, desktop full)
+  const totalPages = Math.max(1, Math.ceil(filteredTemplates.length / itemsPerPage))
+  const startIndex = (page - 1) * itemsPerPage
+  const visibleTemplates = isMobile
+    ? filteredTemplates.slice(startIndex, startIndex + itemsPerPage)
+    : filteredTemplates
 
   return (
     <div className="h-full flex flex-col gap-4">
@@ -63,7 +84,7 @@ const TemplateSelector = () => {
 
       {/* Template Grid */}
       <div className="flex-1 min-h-0 grid grid-cols-1 gap-2 sm:gap-3 overflow-y-auto">
-        {filteredTemplates.map(template => (
+        {visibleTemplates.map(template => (
           <TemplateCard
             key={template.id}
             template={template}
@@ -72,6 +93,47 @@ const TemplateSelector = () => {
           />
         ))}
       </div>
+
+      {/* Mobile Pagination */}
+      {isMobile && totalPages > 1 && (
+        <div className="sm:hidden flex items-center justify-center gap-2">
+          {/* Prev */}
+          <button
+            type="button"
+            onClick={() => setPage(p => Math.max(1, p - 1))}
+            className="px-2 py-1 text-xs rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 disabled:opacity-50"
+            disabled={page === 1}
+          >
+            Prev
+          </button>
+          {/* Pages */}
+          <div className="flex items-center gap-1">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(pn => (
+              <button
+                key={pn}
+                type="button"
+                onClick={() => setPage(pn)}
+                className={`w-7 h-7 rounded-md text-xs border ${
+                  pn === page
+                    ? 'bg-blue-600 text-white border-blue-600'
+                    : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300'
+                }`}
+              >
+                {pn}
+              </button>
+            ))}
+          </div>
+          {/* Next */}
+          <button
+            type="button"
+            onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+            className="px-2 py-1 text-xs rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 disabled:opacity-50"
+            disabled={page === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
 
       {filteredTemplates.length === 0 && (
         <div className="text-center py-8 text-gray-500 dark:text-gray-400">
